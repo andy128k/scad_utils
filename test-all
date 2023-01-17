@@ -1,0 +1,11 @@
+#!/bin/sh
+
+TEST_FUNCTION_REGEX='function\s+(test\w*)\(\)'
+
+for file in `find . -name '*.scad'`
+do
+  for func in `grep -Eo "${TEST_FUNCTION_REGEX}" "$file" | sed -r "s/^.*${TEST_FUNCTION_REGEX}.*$/\\1/g"`
+  do
+    ./test-scad -f "$func" "$file"
+  done
+done
