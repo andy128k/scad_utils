@@ -34,7 +34,7 @@ GREEN='\033[0;32m'
 TEMP_OUT=`mktemp -t testXXXXXXXX.stl`
 for f in $FILES
 do
-  OUTPUT=`echo "assert(${TEST_FUNCTION}()); cube([${TEST_FUNCTION}(), 1, 1]);" | cat "$f" - | openscad -o "$TEMP_OUT" - 2>&1`
+  OUTPUT=`echo "assert(${TEST_FUNCTION}()); cube([${TEST_FUNCTION}(), 1, 1]);" | cat "$f" - | "${OPENSCAD:-openscad}" -o "$TEMP_OUT" - 2>&1`
   RESULT=$?
   rm "$TEMP_OUT"
 
